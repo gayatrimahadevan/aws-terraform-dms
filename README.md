@@ -19,7 +19,7 @@ Create demodb database and appuser with eb_schema
 /* Clone the Oracle docker-images git repository */
 git clone https://github.com/oracle/docker-images.git
 
-/* Download Install binaries from Oracle website.*/
+/* Download Install binaries from Oracle website. https://www.oracle.com/database/technologies/oracle19c-linux-downloads.html */
 /*Copy them to the docker machine.*/
 pscp -i .\acg.ppk '.\LINUX.X64_193000_db_home.zip' ubuntu@100.26.190.208:/tmp
 mv /tmp/LINUX.X64_193000_db_home.zip .
@@ -56,5 +56,5 @@ chmod a+w mssql_data
 mv /tmp/AdventureWorksLT2019.bak .
 
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Deloitte.0" -p 1433:1433 -d  -v /home/ubuntu/mssql_data:/var/opt/mssql --name mymssql mcr.microsoft.com/mssql/server
-
+/* URL for to downloand sample backup file - https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver15&tabs=ssms */
 /* Create dmsuser with deloitte.0 as password and AdventureWorksLT2019 as database owener */
