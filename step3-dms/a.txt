@@ -1,0 +1,571 @@
+[0m
+[1m[36mNote:[0m[1m Objects have changed outside of Terraform[0m
+
+[0mTerraform detected the following changes made outside of Terraform since the
+last "terraform apply":
+
+[1m  # aws_iam_role.dms-cloudwatch-logs-role[0m has been changed[0m[0m
+[0m  [33m~[0m[0m resource "aws_iam_role" "dms-cloudwatch-logs-role" {
+        [1m[0mid[0m[0m                    = "dms-cloudwatch-logs-role"
+      [33m~[0m [0m[1m[0mmanaged_policy_arns[0m[0m   = [
+          [32m+[0m [0m"arn:aws:iam::aws:policy/service-role/AmazonDMSCloudWatchLogsRole",
+        ]
+        [1m[0mname[0m[0m                  = "dms-cloudwatch-logs-role"
+      [32m+[0m [0m[1m[0mtags[0m[0m                  = {}
+        [90m# (8 unchanged attributes hidden)[0m[0m
+
+        [90m# (1 unchanged block hidden)[0m[0m
+    }
+[1m  # aws_iam_role.dms-vpc-role[0m has been changed[0m[0m
+[0m  [33m~[0m[0m resource "aws_iam_role" "dms-vpc-role" {
+        [1m[0mid[0m[0m                    = "dms-vpc-role"
+      [33m~[0m [0m[1m[0mmanaged_policy_arns[0m[0m   = [
+          [32m+[0m [0m"arn:aws:iam::aws:policy/service-role/AmazonDMSVPCManagementRole",
+        ]
+        [1m[0mname[0m[0m                  = "dms-vpc-role"
+      [32m+[0m [0m[1m[0mtags[0m[0m                  = {}
+        [90m# (8 unchanged attributes hidden)[0m[0m
+
+        [90m# (1 unchanged block hidden)[0m[0m
+    }
+[1m  # aws_dms_endpoint.dms-endpoint-oracle[0m has been changed[0m[0m
+[0m  [33m~[0m[0m resource "aws_dms_endpoint" "dms-endpoint-oracle" {
+        [1m[0mid[0m[0m            = "dms-endpoint-oracle"
+      [32m+[0m [0m[1m[0mtags[0m[0m          = {}
+        [90m# (12 unchanged attributes hidden)[0m[0m
+    }
+[1m  # aws_dms_endpoint.dms-endpoint-source[0m has been changed[0m[0m
+[0m  [33m~[0m[0m resource "aws_dms_endpoint" "dms-endpoint-source" {
+        [1m[0mid[0m[0m            = "dms-endpoint-source"
+      [32m+[0m [0m[1m[0mtags[0m[0m          = {}
+        [90m# (12 unchanged attributes hidden)[0m[0m
+    }
+[1m  # aws_dms_endpoint.dms-endpoint-target[0m has been changed[0m[0m
+[0m  [33m~[0m[0m resource "aws_dms_endpoint" "dms-endpoint-target" {
+        [1m[0mid[0m[0m            = "dms-endpoint-target"
+      [32m+[0m [0m[1m[0mtags[0m[0m          = {}
+        [90m# (12 unchanged attributes hidden)[0m[0m
+    }
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create
+[0m
+Terraform will perform the following actions:
+
+[1m  # aws_dms_replication_instance.replication-instance[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_dms_replication_instance" "replication-instance" {
+      [32m+[0m [0m[1m[0mallocated_storage[0m[0m                = 30
+      [32m+[0m [0m[1m[0mapply_immediately[0m[0m                = true
+      [32m+[0m [0m[1m[0mauto_minor_version_upgrade[0m[0m       = true
+      [32m+[0m [0m[1m[0mavailability_zone[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mengine_version[0m[0m                   = "3.4.4"
+      [32m+[0m [0m[1m[0mid[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mkms_key_arn[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mmulti_az[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mpreferred_maintenance_window[0m[0m     = (known after apply)
+      [32m+[0m [0m[1m[0mpublicly_accessible[0m[0m              = true
+      [32m+[0m [0m[1m[0mreplication_instance_arn[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_instance_class[0m[0m       = "dms.t3.medium"
+      [32m+[0m [0m[1m[0mreplication_instance_id[0m[0m          = "dms-replication-instance"
+      [32m+[0m [0m[1m[0mreplication_instance_private_ips[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_instance_public_ips[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_subnet_group_id[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_security_group_ids[0m[0m           = (known after apply)
+    }
+
+[1m  # aws_dms_replication_subnet_group.replication-subnet-group[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_dms_replication_subnet_group" "replication-subnet-group" {
+      [32m+[0m [0m[1m[0mid[0m[0m                                   = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_subnet_group_arn[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_subnet_group_description[0m[0m = "Replication subnet group for DMS."
+      [32m+[0m [0m[1m[0mreplication_subnet_group_id[0m[0m          = "dms-subnet-group"
+      [32m+[0m [0m[1m[0msubnet_ids[0m[0m                           = [
+          [32m+[0m [0m"subnet-09c12fedbf2f7489b",
+          [32m+[0m [0m"subnet-0b35cdb8af20e8b7c",
+        ]
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                             = (known after apply)
+      [32m+[0m [0m[1m[0mvpc_id[0m[0m                               = (known after apply)
+    }
+
+[1m  # aws_dms_replication_task.rt-mssql-pg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_dms_replication_task" "rt-mssql-pg" {
+      [32m+[0m [0m[1m[0mid[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mmigration_type[0m[0m            = "full-load"
+      [32m+[0m [0m[1m[0mreplication_instance_arn[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_task_arn[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_task_id[0m[0m       = "dms-rt-mssql-pg"
+      [32m+[0m [0m[1m[0mreplication_task_settings[0m[0m = jsonencode(
+            {
+              [32m+[0m [0mBeforeImageSettings               = [90mnull[0m[0m
+              [32m+[0m [0mChangeProcessingDdlHandlingPolicy = {
+                  [32m+[0m [0mHandleSourceTableAltered   = true
+                  [32m+[0m [0mHandleSourceTableDropped   = true
+                  [32m+[0m [0mHandleSourceTableTruncated = true
+                }
+              [32m+[0m [0mChangeProcessingTuning            = {
+                  [32m+[0m [0mBatchApplyMemoryLimit         = 500
+                  [32m+[0m [0mBatchApplyPreserveTransaction = true
+                  [32m+[0m [0mBatchApplyTimeoutMax          = 30
+                  [32m+[0m [0mBatchApplyTimeoutMin          = 1
+                  [32m+[0m [0mBatchSplitSize                = 0
+                  [32m+[0m [0mCommitTimeout                 = 1
+                  [32m+[0m [0mMemoryKeepTime                = 60
+                  [32m+[0m [0mMemoryLimitTotal              = 1024
+                  [32m+[0m [0mMinTransactionSize            = 1000
+                  [32m+[0m [0mStatementCacheSize            = 50
+                }
+              [32m+[0m [0mCharacterSetSettings              = [90mnull[0m[0m
+              [32m+[0m [0mControlTablesSettings             = {
+                  [32m+[0m [0mControlSchema               = ""
+                  [32m+[0m [0mHistoryTableEnabled         = false
+                  [32m+[0m [0mHistoryTimeslotInMinutes    = 5
+                  [32m+[0m [0mStatusTableEnabled          = false
+                  [32m+[0m [0mSuspendedTablesTableEnabled = false
+                  [32m+[0m [0mhistoryTimeslotInMinutes    = 5
+                }
+              [32m+[0m [0mErrorBehavior                     = {
+                  [32m+[0m [0mApplyErrorDeletePolicy                      = "IGNORE_RECORD"
+                  [32m+[0m [0mApplyErrorEscalationCount                   = 0
+                  [32m+[0m [0mApplyErrorEscalationPolicy                  = "LOG_ERROR"
+                  [32m+[0m [0mApplyErrorFailOnTruncationDdl               = false
+                  [32m+[0m [0mApplyErrorInsertPolicy                      = "LOG_ERROR"
+                  [32m+[0m [0mApplyErrorUpdatePolicy                      = "LOG_ERROR"
+                  [32m+[0m [0mDataErrorEscalationCount                    = 0
+                  [32m+[0m [0mDataErrorEscalationPolicy                   = "SUSPEND_TABLE"
+                  [32m+[0m [0mDataErrorPolicy                             = "LOG_ERROR"
+                  [32m+[0m [0mDataTruncationErrorPolicy                   = "LOG_ERROR"
+                  [32m+[0m [0mFailOnNoTablesCaptured                      = true
+                  [32m+[0m [0mFailOnTransactionConsistencyBreached        = false
+                  [32m+[0m [0mFullLoadIgnoreConflicts                     = true
+                  [32m+[0m [0mRecoverableErrorCount                       = -1
+                  [32m+[0m [0mRecoverableErrorInterval                    = 5
+                  [32m+[0m [0mRecoverableErrorStopRetryAfterThrottlingMax = true
+                  [32m+[0m [0mRecoverableErrorThrottling                  = true
+                  [32m+[0m [0mRecoverableErrorThrottlingMax               = 1800
+                  [32m+[0m [0mTableErrorEscalationCount                   = 0
+                  [32m+[0m [0mTableErrorEscalationPolicy                  = "STOP_TASK"
+                  [32m+[0m [0mTableErrorPolicy                            = "SUSPEND_TABLE"
+                }
+              [32m+[0m [0mFullLoadSettings                  = {
+                  [32m+[0m [0mCommitRate                      = 10000
+                  [32m+[0m [0mCreatePkAfterFullLoad           = false
+                  [32m+[0m [0mMaxFullLoadSubTasks             = 8
+                  [32m+[0m [0mStopTaskCachedChangesApplied    = false
+                  [32m+[0m [0mStopTaskCachedChangesNotApplied = false
+                  [32m+[0m [0mTargetTablePrepMode             = "TRUNCATE_BEFORE_LOAD"
+                  [32m+[0m [0mTransactionConsistencyTimeout   = 600
+                }
+              [32m+[0m [0mLogging                           = {
+                  [32m+[0m [0mEnableLogging = true
+                  [32m+[0m [0mLogComponents = [
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TRANSFORMATION"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "SOURCE_UNLOAD"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "IO"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TARGET_LOAD"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "PERFORMANCE"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "SOURCE_CAPTURE"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "SORTER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "REST_SERVER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "VALIDATOR_EXT"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TARGET_APPLY"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TASK_MANAGER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TABLES_MANAGER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "METADATA_MANAGER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "FILE_FACTORY"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "COMMON"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "ADDONS"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "DATA_STRUCTURE"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "COMMUNICATION"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "FILE_TRANSFER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                    ]
+                }
+              [32m+[0m [0mLoopbackPreventionSettings        = [90mnull[0m[0m
+              [32m+[0m [0mPostProcessingRules               = [90mnull[0m[0m
+              [32m+[0m [0mStreamBufferSettings              = {
+                  [32m+[0m [0mCtrlStreamBufferSizeInMB = 5
+                  [32m+[0m [0mStreamBufferCount        = 3
+                  [32m+[0m [0mStreamBufferSizeInMB     = 8
+                }
+              [32m+[0m [0mTargetMetadata                    = {
+                  [32m+[0m [0mBatchApplyEnabled            = false
+                  [32m+[0m [0mFullLobMode                  = false
+                  [32m+[0m [0mInlineLobMaxSize             = 0
+                  [32m+[0m [0mLimitedSizeLobMode           = false
+                  [32m+[0m [0mLoadMaxFileSize              = 0
+                  [32m+[0m [0mLobChunkSize                 = 0
+                  [32m+[0m [0mLobMaxSize                   = 0
+                  [32m+[0m [0mParallelApplyBufferSize      = 0
+                  [32m+[0m [0mParallelApplyQueuesPerThread = 0
+                  [32m+[0m [0mParallelApplyThreads         = 0
+                  [32m+[0m [0mParallelLoadBufferSize       = 0
+                  [32m+[0m [0mParallelLoadQueuesPerThread  = 0
+                  [32m+[0m [0mParallelLoadThreads          = 0
+                  [32m+[0m [0mSupportLobs                  = false
+                  [32m+[0m [0mTargetSchema                 = "eb_schema"
+                  [32m+[0m [0mTaskRecoveryTableEnabled     = false
+                }
+            }
+        )
+      [32m+[0m [0m[1m[0msource_endpoint_arn[0m[0m       = "arn:aws:dms:us-east-1:210195853677:endpoint:K5NP7FWF2UAX3ITN74VJ2SRXTE4HUYSB64EMU7A"
+      [32m+[0m [0m[1m[0mtable_mappings[0m[0m            = jsonencode(
+            {
+              [32m+[0m [0mrules = [
+                  [32m+[0m [0m{
+                      [32m+[0m [0mfilters        = []
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mschema-name = "SalesLT"
+                          [32m+[0m [0mtable-name  = "%"
+                        }
+                      [32m+[0m [0mrule-action    = "include"
+                      [32m+[0m [0mrule-id        = "1"
+                      [32m+[0m [0mrule-name      = "1"
+                      [32m+[0m [0mrule-type      = "selection"
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mschema-name = "%"
+                          [32m+[0m [0mtable-name  = "%"
+                        }
+                      [32m+[0m [0mold-value      = [90mnull[0m[0m
+                      [32m+[0m [0mrule-action    = "convert-lowercase"
+                      [32m+[0m [0mrule-id        = "2"
+                      [32m+[0m [0mrule-name      = "2"
+                      [32m+[0m [0mrule-target    = "table"
+                      [32m+[0m [0mrule-type      = "transformation"
+                      [32m+[0m [0mvalue          = [90mnull[0m[0m
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mcolumn-name = "%"
+                          [32m+[0m [0mschema-name = "%"
+                          [32m+[0m [0mtable-name  = "%"
+                        }
+                      [32m+[0m [0mold-value      = [90mnull[0m[0m
+                      [32m+[0m [0mrule-action    = "convert-lowercase"
+                      [32m+[0m [0mrule-id        = "3"
+                      [32m+[0m [0mrule-name      = "3"
+                      [32m+[0m [0mrule-target    = "column"
+                      [32m+[0m [0mrule-type      = "transformation"
+                      [32m+[0m [0mvalue          = [90mnull[0m[0m
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mschema-name = "SalesLT"
+                        }
+                      [32m+[0m [0mrule-action    = "rename"
+                      [32m+[0m [0mrule-id        = "4"
+                      [32m+[0m [0mrule-name      = "4"
+                      [32m+[0m [0mrule-target    = "schema"
+                      [32m+[0m [0mrule-type      = "transformation"
+                      [32m+[0m [0mvalue          = "eb_schema"
+                    },
+                ]
+            }
+        )
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_endpoint_arn[0m[0m       = "arn:aws:dms:us-east-1:210195853677:endpoint:OYFUZVLQ7OALEFZKKH43IIWVK7L7HSETPZWG4AI"
+    }
+
+[1m  # aws_dms_replication_task.rt-oracle-pg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "aws_dms_replication_task" "rt-oracle-pg" {
+      [32m+[0m [0m[1m[0mid[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mmigration_type[0m[0m            = "full-load"
+      [32m+[0m [0m[1m[0mreplication_instance_arn[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_task_arn[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mreplication_task_id[0m[0m       = "dms-rt-oracle-pg"
+      [32m+[0m [0m[1m[0mreplication_task_settings[0m[0m = jsonencode(
+            {
+              [32m+[0m [0mBeforeImageSettings               = [90mnull[0m[0m
+              [32m+[0m [0mChangeProcessingDdlHandlingPolicy = {
+                  [32m+[0m [0mHandleSourceTableAltered   = true
+                  [32m+[0m [0mHandleSourceTableDropped   = true
+                  [32m+[0m [0mHandleSourceTableTruncated = true
+                }
+              [32m+[0m [0mChangeProcessingTuning            = {
+                  [32m+[0m [0mBatchApplyMemoryLimit         = 500
+                  [32m+[0m [0mBatchApplyPreserveTransaction = true
+                  [32m+[0m [0mBatchApplyTimeoutMax          = 30
+                  [32m+[0m [0mBatchApplyTimeoutMin          = 1
+                  [32m+[0m [0mBatchSplitSize                = 0
+                  [32m+[0m [0mCommitTimeout                 = 1
+                  [32m+[0m [0mMemoryKeepTime                = 60
+                  [32m+[0m [0mMemoryLimitTotal              = 1024
+                  [32m+[0m [0mMinTransactionSize            = 1000
+                  [32m+[0m [0mStatementCacheSize            = 50
+                }
+              [32m+[0m [0mCharacterSetSettings              = [90mnull[0m[0m
+              [32m+[0m [0mControlTablesSettings             = {
+                  [32m+[0m [0mControlSchema               = ""
+                  [32m+[0m [0mHistoryTableEnabled         = false
+                  [32m+[0m [0mHistoryTimeslotInMinutes    = 5
+                  [32m+[0m [0mStatusTableEnabled          = false
+                  [32m+[0m [0mSuspendedTablesTableEnabled = false
+                  [32m+[0m [0mhistoryTimeslotInMinutes    = 5
+                }
+              [32m+[0m [0mErrorBehavior                     = {
+                  [32m+[0m [0mApplyErrorDeletePolicy                      = "IGNORE_RECORD"
+                  [32m+[0m [0mApplyErrorEscalationCount                   = 0
+                  [32m+[0m [0mApplyErrorEscalationPolicy                  = "LOG_ERROR"
+                  [32m+[0m [0mApplyErrorFailOnTruncationDdl               = false
+                  [32m+[0m [0mApplyErrorInsertPolicy                      = "LOG_ERROR"
+                  [32m+[0m [0mApplyErrorUpdatePolicy                      = "LOG_ERROR"
+                  [32m+[0m [0mDataErrorEscalationCount                    = 0
+                  [32m+[0m [0mDataErrorEscalationPolicy                   = "SUSPEND_TABLE"
+                  [32m+[0m [0mDataErrorPolicy                             = "LOG_ERROR"
+                  [32m+[0m [0mDataTruncationErrorPolicy                   = "LOG_ERROR"
+                  [32m+[0m [0mFailOnNoTablesCaptured                      = true
+                  [32m+[0m [0mFailOnTransactionConsistencyBreached        = false
+                  [32m+[0m [0mFullLoadIgnoreConflicts                     = true
+                  [32m+[0m [0mRecoverableErrorCount                       = -1
+                  [32m+[0m [0mRecoverableErrorInterval                    = 5
+                  [32m+[0m [0mRecoverableErrorStopRetryAfterThrottlingMax = true
+                  [32m+[0m [0mRecoverableErrorThrottling                  = true
+                  [32m+[0m [0mRecoverableErrorThrottlingMax               = 1800
+                  [32m+[0m [0mTableErrorEscalationCount                   = 0
+                  [32m+[0m [0mTableErrorEscalationPolicy                  = "STOP_TASK"
+                  [32m+[0m [0mTableErrorPolicy                            = "SUSPEND_TABLE"
+                }
+              [32m+[0m [0mFullLoadSettings                  = {
+                  [32m+[0m [0mCommitRate                      = 10000
+                  [32m+[0m [0mCreatePkAfterFullLoad           = false
+                  [32m+[0m [0mMaxFullLoadSubTasks             = 8
+                  [32m+[0m [0mStopTaskCachedChangesApplied    = false
+                  [32m+[0m [0mStopTaskCachedChangesNotApplied = false
+                  [32m+[0m [0mTargetTablePrepMode             = "TRUNCATE_BEFORE_LOAD"
+                  [32m+[0m [0mTransactionConsistencyTimeout   = 600
+                }
+              [32m+[0m [0mLogging                           = {
+                  [32m+[0m [0mEnableLogging = true
+                  [32m+[0m [0mLogComponents = [
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TRANSFORMATION"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "SOURCE_UNLOAD"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "IO"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TARGET_LOAD"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "PERFORMANCE"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "SOURCE_CAPTURE"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "SORTER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "REST_SERVER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "VALIDATOR_EXT"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TARGET_APPLY"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TASK_MANAGER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "TABLES_MANAGER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "METADATA_MANAGER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "FILE_FACTORY"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "COMMON"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "ADDONS"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "DATA_STRUCTURE"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "COMMUNICATION"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                      [32m+[0m [0m{
+                          [32m+[0m [0mId       = "FILE_TRANSFER"
+                          [32m+[0m [0mSeverity = "LOGGER_SEVERITY_DEFAULT"
+                        },
+                    ]
+                }
+              [32m+[0m [0mLoopbackPreventionSettings        = [90mnull[0m[0m
+              [32m+[0m [0mPostProcessingRules               = [90mnull[0m[0m
+              [32m+[0m [0mStreamBufferSettings              = {
+                  [32m+[0m [0mCtrlStreamBufferSizeInMB = 5
+                  [32m+[0m [0mStreamBufferCount        = 3
+                  [32m+[0m [0mStreamBufferSizeInMB     = 8
+                }
+              [32m+[0m [0mTargetMetadata                    = {
+                  [32m+[0m [0mBatchApplyEnabled            = false
+                  [32m+[0m [0mFullLobMode                  = false
+                  [32m+[0m [0mInlineLobMaxSize             = 0
+                  [32m+[0m [0mLimitedSizeLobMode           = false
+                  [32m+[0m [0mLoadMaxFileSize              = 0
+                  [32m+[0m [0mLobChunkSize                 = 0
+                  [32m+[0m [0mLobMaxSize                   = 0
+                  [32m+[0m [0mParallelApplyBufferSize      = 0
+                  [32m+[0m [0mParallelApplyQueuesPerThread = 0
+                  [32m+[0m [0mParallelApplyThreads         = 0
+                  [32m+[0m [0mParallelLoadBufferSize       = 0
+                  [32m+[0m [0mParallelLoadQueuesPerThread  = 0
+                  [32m+[0m [0mParallelLoadThreads          = 0
+                  [32m+[0m [0mSupportLobs                  = false
+                  [32m+[0m [0mTargetSchema                 = "eb_schema"
+                  [32m+[0m [0mTaskRecoveryTableEnabled     = false
+                }
+            }
+        )
+      [32m+[0m [0m[1m[0msource_endpoint_arn[0m[0m       = "arn:aws:dms:us-east-1:210195853677:endpoint:KXMJQMDZ3TQCCNFD66XZVY4TBLS4MQU2RJTCNGA"
+      [32m+[0m [0m[1m[0mtable_mappings[0m[0m            = jsonencode(
+            {
+              [32m+[0m [0mrules = [
+                  [32m+[0m [0m{
+                      [32m+[0m [0mfilters        = []
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mschema-name = "SCOTT"
+                          [32m+[0m [0mtable-name  = "%"
+                        }
+                      [32m+[0m [0mrule-action    = "include"
+                      [32m+[0m [0mrule-id        = "1"
+                      [32m+[0m [0mrule-name      = "1"
+                      [32m+[0m [0mrule-type      = "selection"
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mschema-name = "%"
+                          [32m+[0m [0mtable-name  = "%"
+                        }
+                      [32m+[0m [0mold-value      = [90mnull[0m[0m
+                      [32m+[0m [0mrule-action    = "convert-lowercase"
+                      [32m+[0m [0mrule-id        = "2"
+                      [32m+[0m [0mrule-name      = "2"
+                      [32m+[0m [0mrule-target    = "table"
+                      [32m+[0m [0mrule-type      = "transformation"
+                      [32m+[0m [0mvalue          = [90mnull[0m[0m
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mcolumn-name = "%"
+                          [32m+[0m [0mschema-name = "%"
+                          [32m+[0m [0mtable-name  = "%"
+                        }
+                      [32m+[0m [0mold-value      = [90mnull[0m[0m
+                      [32m+[0m [0mrule-action    = "convert-lowercase"
+                      [32m+[0m [0mrule-id        = "3"
+                      [32m+[0m [0mrule-name      = "3"
+                      [32m+[0m [0mrule-target    = "column"
+                      [32m+[0m [0mrule-type      = "transformation"
+                      [32m+[0m [0mvalue          = [90mnull[0m[0m
+                    },
+                  [32m+[0m [0m{
+                      [32m+[0m [0mobject-locator = {
+                          [32m+[0m [0mschema-name = "SCOTT"
+                        }
+                      [32m+[0m [0mrule-action    = "rename"
+                      [32m+[0m [0mrule-id        = "4"
+                      [32m+[0m [0mrule-name      = "4"
+                      [32m+[0m [0mrule-target    = "schema"
+                      [32m+[0m [0mrule-type      = "transformation"
+                      [32m+[0m [0mvalue          = "eb_schema"
+                    },
+                ]
+            }
+        )
+      [32m+[0m [0m[1m[0mtags_all[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mtarget_endpoint_arn[0m[0m       = "arn:aws:dms:us-east-1:210195853677:endpoint:OYFUZVLQ7OALEFZKKH43IIWVK7L7HSETPZWG4AI"
+    }
+
+[0m[1mPlan:[0m 4 to add, 0 to change, 0 to destroy.
+[0m
