@@ -47,7 +47,7 @@
             "object-locator": {
                 "schema-name": "SCOTT"
             },
-            "value": "eb_schema"
+            "value": "scott"
         }
     ]
 }

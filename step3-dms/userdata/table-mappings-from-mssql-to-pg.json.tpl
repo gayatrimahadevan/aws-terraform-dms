@@ -47,7 +47,7 @@
             "object-locator": {
                 "schema-name": "SalesLT"
             },
-            "value": "eb_schema"
+            "value": "saleslt"
         }
     ]
 }
