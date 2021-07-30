@@ -55,7 +55,7 @@ Run Image
 docker run --name myorcl \
 -p 1521:1521 \
 -p 5500:5500 -d \
--e ORACLE_PWD=Deloitte.0 \
+-e ORACLE_PWD=XXX \
 -e ORACLE_EDITION=enterprise \
 -e ENABLE_ARCHIVELOG=true \
 -v /home/ubuntu/oracle_data:/opt/oracle/oradata \
@@ -90,18 +90,45 @@ Copy Sample database from microsoft to data directory mssql_data  to restore.
 
 Downloand sample backup file. [URL](https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver15&tabs=ssms)
 
-Create dmsuser with deloitte.0 as password and AdventureWorksLT2019 as database owener
+Create dms_user with xxxx as password and AdventureWorksLT2019 as database owener
 
 `mv /tmp/AdventureWorksLT2019.bak .`
 
 ```
 docker run -e "ACCEPT_EULA=Y" \
--e "SA_PASSWORD=Deloitte.0" \
+-e "SA_PASSWORD=XXX" \
 -p 1433:1433 -d \
 -v /home/ubuntu/mssql_data:/var/opt/mssql \
 --name mymssql mcr.microsoft.com/mssql/server:latest
 ```
 Follow the AWS documentation to enable replication in MSSQL server [here](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html#CHAP_Source.SQLServer.Prerequisites)
+
+Login as **sa** user and Enable distribution, Create distribution database & publish
+```
+USE master 
+EXEC sp_replicationdboption 
+@dbname = 'AdventureWorksLT2019', 
+@optname = 'publish', 
+@value = 'true'
+GO
+select name from sys.databases where is_distributor=1
+
+select @@SERVERNAME
+use master
+exec sp_adddistributor 
+ @distributor = 'XXX',
+ @heartbeat_interval=10,
+ @password='XXXXX'
+USE master
+EXEC sp_adddistributiondb 
+    @database = 'dist1', 
+    @security_mode = 1;
+GO
+exec sp_adddistpublisher 
+@publisher = 'XXX', 
+@distribution_db = 'dist1';
+GO
+```
 
 2. Install postgres RDS and create appuser and eb_schema to hold migrated data.
 Create RDS
