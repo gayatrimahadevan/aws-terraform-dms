@@ -12,4 +12,4 @@ terraform.tfstate.backup
 ### Terraform Patch ###
 # End of https://www.gitignore.io/api/terraform
 *.backup
-*.json
+#*.json

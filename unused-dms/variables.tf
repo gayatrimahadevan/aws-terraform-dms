@@ -12,9 +12,9 @@ variable "instance_type" {
 }
 variable "targetdb" {
   description = "DMS target db host"
-  default     = "db-ebportal.cnrmyinhwqrd.us-east-1.rds.amazonaws.com"
+  default     = "db-ebportal.cs46pp7ymrlq.us-east-1.rds.amazonaws.com"
 }
 variable "dbserver" {
   description = "Db host"
-  default     = "100.26.190.208"
+  default     = "54.224.171.54"
 }

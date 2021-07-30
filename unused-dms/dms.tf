@@ -3,7 +3,7 @@ resource "aws_dms_replication_subnet_group" "replication-subnet-group" {
   replication_subnet_group_description = "Replication subnet group for DMS."
   replication_subnet_group_id          = "dms-subnet-group"
   subnet_ids                           = data.aws_subnet_ids.public.ids
-  depends_on	=[aws_iam_role_policy_attachment.dms-vpc-role-AmazonDMSVPCManagementRole]
+  depends_on                           = [aws_iam_role_policy_attachment.dms-vpc-role-AmazonDMSVPCManagementRole]
 }
 # Create a new replication instance
 resource "aws_dms_replication_instance" "replication-instance" {
@@ -31,7 +31,7 @@ resource "aws_dms_replication_task" "rt-oracle-pg" {
   replication_instance_arn  = aws_dms_replication_instance.replication-instance.replication_instance_arn
   replication_task_id       = "dms-rt-oracle-pg"
   source_endpoint_arn       = aws_dms_endpoint.dms-endpoint-oracle.endpoint_arn
-  target_endpoint_arn       = aws_dms_endpoint.dms-endpoint-target.endpoint_arn
+  target_endpoint_arn       = aws_dms_endpoint.dms-endpoint-targetorcl.endpoint_arn
   table_mappings            = data.template_file.table-mappings-from-oracle-to-pg.rendered
   replication_task_settings = file("./userdata/task-settings-from-oracle-to-pg.json")
 }
@@ -60,9 +60,18 @@ resource "aws_dms_endpoint" "dms-endpoint-target" {
   endpoint_type = "target"
   engine_name   = "aurora-postgresql"
   server_name   = var.targetdb
+  database_name = "customerdb"
+  username      = "appuser"
+  password      = "password02"
+  port          = "5432"
+}
+resource "aws_dms_endpoint" "dms-endpoint-targetorcl" {
+  endpoint_id   = "dms-endpoint-targetorcl"
+  endpoint_type = "target"
+  engine_name   = "aurora-postgresql"
+  server_name   = var.targetdb
   database_name = "demodb"
   username      = "appuser"
   password      = "password02"
   port          = "5432"
 }
-

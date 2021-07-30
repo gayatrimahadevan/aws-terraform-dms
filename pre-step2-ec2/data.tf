@@ -23,7 +23,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    values = ["dmsdb2021"]
   }
 
   filter {
@@ -31,5 +31,21 @@ data "aws_ami" "ubuntu" {
     values = ["hvm"]
   }
 
-  owners = ["099720109477"] # Canonical
+  owners = ["983569616860"] # Self
 }
+
+# data "aws_ami" "ubuntu" {
+#  most_recent = true
+
+#  filter {
+#    name   = "name"
+#    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+#  }
+
+#  filter {
+#    name   = "virtualization-type"
+#    values = ["hvm"]
+#  }
+
+#  owners = ["099720109477"] # Canonical
+#}
