@@ -105,13 +105,13 @@ Create directory to contain data to persist
 
 `mkdir mssql_data`
 
-`chmod a+w mssql_data`
-
 `cd mssql_data`
 
-`mkdir RplData`
+`mkdir ReplData`
 
-`chmod a+rw RplData`
+`cd ..`
+
+`chmod a+w mssql_data`
 
 Copy Sample database from microsoft to data directory mssql_data  to restore.
 
@@ -132,14 +132,6 @@ Follow the AWS documentation to enable replication in MSSQL server [here](https:
 
 Login as **sa** user and Enable distribution, Create distribution database & publish
 ```
-USE master 
-EXEC sp_replicationdboption 
-@dbname = 'AdventureWorksLT2019', 
-@optname = 'publish', 
-@value = 'true'
-GO
-select name from sys.databases where is_distributor=1
-
 select @@SERVERNAME
 use master
 exec sp_adddistributor 
@@ -155,6 +147,13 @@ exec sp_adddistpublisher
 @publisher = 'XXX', 
 @distribution_db = 'dist1';
 GO
+USE master 
+EXEC sp_replicationdboption 
+@dbname = 'AdventureWorksLT2019', 
+@optname = 'publish', 
+@value = 'true'
+GO
+select name from sys.databases where is_distributor=1
 ```
 
 2. Install postgres RDS and create appuser and eb_schema to hold migrated data.
