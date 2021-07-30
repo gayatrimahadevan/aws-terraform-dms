@@ -66,7 +66,34 @@ Create SCOTT schema using scott.sql
 Create dms_user will DMS permissions on PDB using dms_user.sql
 
 `docker exec -it myorcl sqlplus pdbadmin@ORCLPDB1`
-Steps enable SSL
+
+Follow AWS documentation to [enable SSL](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Security.SSL.Oracle)
+```
+docker exec -it myorcl /bin/bash
+
+cd /opt/oracle/oradata/
+mkdir server_wallet
+openssl genrsa -out self-rootCA.key 2048
+openssl req -x509 -new -nodes -key self-rootCA.key -sha256 -days 365 -out self-rootCA.pem
+orapki wallet create -wallet /opt/oracle/oradata/server_wallet -pwd  Wallet@123 -auto_login_local
+orapki wallet add -wallet /opt/oracle/oradata/server_wallet -trusted_cert -cert self-rootCA.pem -pwd Wallet@123
+orapki wallet display -wallet /opt/oracle/oradata/server_wallet -pwd Wallet@123
+orapki wallet add -wallet /opt/oracle/oradata/server_wallet -dn "CN=dms" -keysize 2048 -sign_alg sha256 -pwd Wallet@123
+openssl pkcs12 -in /opt/oracle/oradata/server_wallet/ewallet.p12 -nodes -out nonoracle_wallet.pem
+openssl req -new -key nonoracle_wallet.pem -out self-signed-oracle.csr
+openssl req -noout -text -in self-signed-oracle.csr | grep -i signature
+openssl x509 -req -in self-signed-oracle.csr -CA self-rootCA.pem -CAkey self-rootCA.key -CAcreateserial -out self-signed-oracle.crt -days 365 -sha256
+orapki wallet add -wallet /opt/oracle/oradata/server_wallet -user_cert -cert self-signed-oracle.crt -pwd Wallet@123
+lsnrctl start
+sqlplus -L pdbadmin/Deloitte.0@ORCLPDB_ssl
+SELECT SYS_CONTEXT('USERENV', 'network_protocol') FROM DUAL;
+
+orapki wallet create -wallet C:\Users\gkolluru\app\wallet -pwd  Wallet@123 -auto_login
+orapki wallet add -wallet C:\Users\gkolluru\app\wallet  -trusted_cert -cert self-signed-oracle.crt -pwd Wallet@123
+orapki wallet display -wallet C:\Users\gkolluru\app\wallet -pwd Wallet@123
+OU=workplace,O=Default Company Ltd,L=Default City,C=us
+orapki wallet export -wallet C:\Users\gkolluru\app\wallet -pwd Wallet@123 -dn "OU=workplace,O=Default Company Ltd,L=Default City,C=us" -cert ./oracle-db-certificate.pem
+```
 
 Steps to run MS SQL Server on Docker
 
