@@ -35,9 +35,9 @@ Download Install binaries from [Oracle website.](https://www.oracle.com/database
 
 Copy them to the docker machine.
 
-`pscp -i .\acg.ppk '.\LINUX.X64_193000_db_home.zip' ubuntu@100.26.190.208:/tmp`
+`pscp -i .\acg.ppk '.\LINUX.X64_213000_db_home.zip' ubuntu@100.26.190.208:/tmp`
 
-`mv /tmp/LINUX.X64_193000_db_home.zip .`
+`mv /tmp/LINUX.X64_213000_db_home.zip .`
 
 Build the image
 
@@ -52,15 +52,14 @@ Create directory to contain data to persist
 Run Image
 
 ```
-docker run --name myorcl \
+docker run --name myoracle \
 -p 1521:1521 \
 -p 5500:5500 -d \
 -e ORACLE_PWD=XXX \
 -e ORACLE_EDITION=enterprise \
 -e ENABLE_ARCHIVELOG=true \
--v /home/ubuntu/oracle_data:/opt/oracle/oradata \
-oracle/database:19.3.0-ee
-```
+-v /home/ubuntu/dms/oracle_data:/opt/oracle/oradata \
+myorcl:onprem```
 
 Create SCOTT schema using scott.sql 
 Create dms_user will DMS permissions on PDB using dms_user.sql
