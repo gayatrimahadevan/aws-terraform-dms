@@ -36,6 +36,7 @@ variable "endpoints" {
     database_password                  = string
     database_port                      = number
     ssl_mode                           = string
+    extra_connection_attributes        = string
   #  certificate_arn                    = string
   }))
 }

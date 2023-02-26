@@ -7,7 +7,7 @@ resource "aws_instance" "build" {
     volume_type = "gp3"
   }
   # the VPC subnet
-  subnet_id = tolist(data.aws_subnet_ids.public.ids)[0]
+  subnet_id = tolist(data.aws_subnets.public.ids)[0]
 
   # the security group
   vpc_security_group_ids = [

@@ -2,7 +2,7 @@
 resource "aws_dms_replication_subnet_group" "replication-subnet-group" {
   replication_subnet_group_description = "Replication subnet group for DMS."
   replication_subnet_group_id          = "dms-subnet-group-${var.environment}"
-  subnet_ids                           = data.aws_subnet_ids.private.ids  
+  subnet_ids                           = data.aws_subnets.private.ids  
 #  tags = merge(
 #    module.label.tags
 #  )
@@ -51,7 +51,8 @@ resource "aws_dms_endpoint" "dms-endpoint" {
   username                    = each.value["database_username"]
   password                    = each.value["database_password"]
   port                        = each.value["database_port"]
-  #ssl_mode                    = each.value["ssl_mode"]
+  ssl_mode                    = each.value["ssl_mode"]
+  extra_connection_attributes = each.value["extra_connection_attributes"]
   #certificate_arn             = each.value["certificate_arn"]
   #tags = merge(
   #  {

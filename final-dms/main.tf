@@ -2,16 +2,16 @@ locals {
   endpoints = jsondecode(data.aws_secretsmanager_secret_version.dms-con-details.secret_string)
 }
 
-resource "aws_dms_certificate" "dms-client-certificate" {
-  certificate_id     = "dms-client-certificate-${lower(var.environment)}"
-  certificate_wallet = filebase64("./userdata/${lower(var.client_cert)}")
+#resource "aws_dms_certificate" "dms-client-certificate" {
+#  certificate_id     = "dms-client-certificate-${lower(var.environment)}"
+#  certificate_wallet = filebase64("./userdata/${lower(var.client_cert)}")
   #tags = merge(
   #  {
   #    "Name" = "dms-client-certificate-${lower(var.environment)}"
   #  },
   #  module.label.tags
   #)
-}
+#}
 ######################  DMS Module     #################################
 module "dms-eb-portal" {
   source           = "../modules/dms"
@@ -42,7 +42,8 @@ module "dms-eb-portal" {
     oracle-pg = {
       task_settings       = file("./userdata/task-settings-from-oracle-to-pg.json")
       mappings            = data.template_file.table-mappings-from-oracle-to-pg.rendered
-      migrationtype       = "full-load-and-cdc"
+      #migrationtype       = "full-load-and-cdc"
+      migrationtype       = "full-load"
       source_endpoint_arn = "oracle-source"
       target_endpoint_arn = "postgres-oracle-target"
     }
@@ -57,6 +58,7 @@ module "dms-eb-portal" {
       database_host     = local.endpoints["sqlserver-source"].database_host
       database_port     = local.endpoints["sqlserver-source"].database_port
       ssl_mode          = "none"
+      extra_connection_attributes =""
       #certificate_arn                    = string
     },
     postgres-sqlserver-target = {
@@ -68,6 +70,7 @@ module "dms-eb-portal" {
       database_password = local.endpoints["postgres-sqlserver-target"].database_password
       database_port     = local.endpoints["postgres-sqlserver-target"].database_port
       ssl_mode          = "none"
+      extra_connection_attributes = ""
     },
     postgres-oracle-target = {
       endpoint_type     = "target"
@@ -77,7 +80,8 @@ module "dms-eb-portal" {
       database_username = local.endpoints["postgres-oracle-target"].database_username
       database_password = local.endpoints["postgres-oracle-target"].database_password
       database_port     = local.endpoints["postgres-oracle-target"].database_port
-      ssl_mode          = "none"
+      ssl_mode          = "require"
+      extra_connection_attributes = ""
     },
     oracle-source = {
       endpoint_type     = "source"
@@ -88,6 +92,8 @@ module "dms-eb-portal" {
       database_host     = local.endpoints["oracle-source"].database_host
       database_port     = local.endpoints["oracle-source"].database_port
       ssl_mode          = "none"
+      oracle-settings   = "useBFile:true,useLogminerReader:false"
+      extra_connection_attributes = "useLogMinerReader=N;useBfile=Y;"
     }
   }
 }

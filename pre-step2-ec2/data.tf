@@ -4,26 +4,25 @@ data "aws_vpc" "dev-vpc" {
     values = ["dev-vpc"]
   }
 }
-data "aws_subnet_ids" "private" {
-  vpc_id = data.aws_vpc.dev-vpc.id
+data "aws_subnets" "private" {
   filter {
     name   = "tag:Name"
     values = ["dev-vpc-private"] # insert values here
   }
 }
-data "aws_subnet_ids" "public" {
-  vpc_id = data.aws_vpc.dev-vpc.id
+data "aws_subnets" "public" {
   filter {
     name   = "tag:Name"
     values = ["dev-vpc-public"] # insert values here
   }
 }
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
   filter {
-    name   = "name"
-    values = ["dmsdb2021"]
+    name   = "image-id"
+    values = ["ami-01071ccc6adb7e30b"]
   }
 
   filter {
@@ -33,13 +32,12 @@ data "aws_ami" "ubuntu" {
 
   owners = ["983569616860"] # Self
 }
-
-# data "aws_ami" "ubuntu" {
+#data "aws_ami" "ubuntu" {
 #  most_recent = true
 
 #  filter {
 #    name   = "name"
-#    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+#    values = ["ubuntu/images/hvm-ssd/ubuntu-kinetic-22.10-amd64-server-*"]
 #  }
 
 #  filter {
@@ -49,3 +47,4 @@ data "aws_ami" "ubuntu" {
 
 #  owners = ["099720109477"] # Canonical
 #}
+

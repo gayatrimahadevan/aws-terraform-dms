@@ -4,9 +4,9 @@ data "aws_vpc" "vpc" {
     values = [var.vpc_name]
   }
 }
-data "aws_subnet_ids" "private" {
-  vpc_id = data.aws_vpc.vpc.id
-  tags = {
-    Type = "Private"
+data "aws_subnets" "private" {
+  filter {
+    name   = "tag:Name"
+    values = ["dev-vpc-private"] # insert values here
   }
 }
