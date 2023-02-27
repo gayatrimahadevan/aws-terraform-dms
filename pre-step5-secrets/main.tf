@@ -12,25 +12,25 @@ variable "endpoints" {
       database_name     = "AdventureWorksLT2019"
       database_username = "dms_user"
       database_password = "deloitte.0"
-      database_host     = "143.0.1.156"
+      database_host     = "143.0.1.81"
       database_port     = 1433
     },
     postgres-sqlserver-target = {
-      database_host     = "db-ebportal.cimx6fyo6eit.us-east-1.rds.amazonaws.com"
+      database_host     = "db-ebportal.cc9nuoyyzd1l.us-east-1.rds.amazonaws.com"
       database_name     = "customerdb"
       database_username = "customer_appuser"
-      database_password = "deloitte.0"
+      database_password = "password02"
       database_port     = 5432
     },
     postgres-oracle-target = {
-      database_host     = "db-ebportal.cimx6fyo6eit.us-east-1.rds.amazonaws.com"
+      database_host     = "db-ebportal.cc9nuoyyzd1l.us-east-1.rds.amazonaws.com"
       database_name     = "empdb"
       database_username = "emp_appuser"
       database_password = "password02"
       database_port     = 5432
     },
     oracle-source = {
-      database_host     = "143.0.1.41"
+      database_host     = "143.0.1.81"
       database_name     = "ORCLPDB1"
       database_username = "dms_user"
       database_password = "deloitte.0"

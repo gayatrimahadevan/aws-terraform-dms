@@ -13,7 +13,7 @@ GRANT emp_rw TO emp_appuser;
 DROP SCHEMA public;
 \c postgres
 ALTER DATABASE empdb OWNER TO emp_appuser;
-\c postgresql://emp_appuser:password02@db-ebportal.cimx6fyo6eit.us-east-1.rds.amazonaws.com/empdb
+\c postgresql://emp_appuser:password02@db-ebportal.cc9nuoyyzd1l.us-east-1.rds.amazonaws.com/empdb
 CREATE SCHEMA scott;
 GRANT USAGE ON SCHEMA scott TO emp_ro;
 GRANT USAGE,CREATE ON SCHEMA scott TO emp_rw;

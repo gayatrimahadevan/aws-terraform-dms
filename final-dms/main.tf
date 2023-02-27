@@ -34,8 +34,8 @@ module "dms-eb-portal" {
     mssql-pg = {
       task_settings       = file("./userdata/task-settings-from-mssql-to-pg.json")
       mappings            = data.template_file.table-mappings-from-mssql-to-pg.rendered
-      #migrationtype       = "full-load"
-      migrationtype       = "full-load-and-cdc"
+      migrationtype       = "full-load"
+      #migrationtype       = "full-load-and-cdc"
       source_endpoint_arn = "sqlserver-source"
       target_endpoint_arn = "postgres-sqlserver-target"
     },
@@ -69,7 +69,7 @@ module "dms-eb-portal" {
       database_username = local.endpoints["postgres-sqlserver-target"].database_username
       database_password = local.endpoints["postgres-sqlserver-target"].database_password
       database_port     = local.endpoints["postgres-sqlserver-target"].database_port
-      ssl_mode          = "none"
+      ssl_mode          = "require"
       extra_connection_attributes = ""
     },
     postgres-oracle-target = {

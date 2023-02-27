@@ -13,7 +13,7 @@ GRANT customer_rw TO customer_appuser;
 DROP SCHEMA public;
 \c postgres
 ALTER DATABASE customerdb OWNER TO customer_appuser;
-\c postgresql://customer_appuser:password02@db-ebportal.cqxof8vdhbed.us-east-1.rds.amazonaws.com/customerdb
+\c postgresql://customer_appuser:password02@db-ebportal.cc9nuoyyzd1l.us-east-1.rds.amazonaws.com/customerdb
 CREATE SCHEMA saleslt;
 GRANT USAGE ON SCHEMA saleslt TO customer_ro;
 GRANT USAGE,CREATE ON SCHEMA saleslt TO customer_rw;
